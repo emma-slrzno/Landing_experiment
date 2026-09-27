@@ -50,4 +50,3 @@ Evaluar un experimento A/B realizado sobre una página de inicio (landing page) 
 ## Contacto
 
 - LinkedIn: (https://www.linkedin.com/in/emma-solorzano-hernandez-jauregui-200301345/)
-- Perfil de Tableau Public: https://public.tableau.com/views/S11TripleTen/OverviewEjecutivo?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
