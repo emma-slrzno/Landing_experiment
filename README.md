@@ -45,3 +45,9 @@ Evaluar un experimento A/B realizado sobre una página de inicio (landing page) 
 - Interpretación de resultados estadísticos en términos de **decisión de negocio** (rechazar o no rechazar H₀) y su implicación práctica, evitando confundir significancia estadística con relevancia de negocio.
 - Uso de visualizaciones (`countplot` con `hue`) para reforzar y comunicar visualmente los resultados de las pruebas estadísticas.
 - Construcción de un **insight ejecutivo** que traduce hallazgos técnicos en recomendaciones accionables: priorizar la Página B, reasignar presupuesto hacia Ads y Email, y diseñar una estrategia de nurturing distinta para tráfico orgánico y de referidos.
+
+
+## Contacto
+
+- LinkedIn: (https://www.linkedin.com/in/emma-solorzano-hernandez-jauregui-200301345/)
+- Perfil de Tableau Public: https://public.tableau.com/views/S11TripleTen/OverviewEjecutivo?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
