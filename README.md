@@ -1,3 +1,13 @@
+<a id="top"></a>
+
+# 🧪 Experimento A/B en Landing Page · A/B Experiment on a Landing Page
+
+**🌎 Idioma / Language:** [🇪🇸 Español](#es) · [🇬🇧 English](#en)
+
+---
+
+<a id="es"></a>
+
 # Experimento A/B en página de inicio (Landing Page)
 
 Análisis estadístico de un experimento A/B que compara dos versiones de una landing page (**A: control** y **B: variante**) para decidir, con datos, cuál versión debe quedarse en producción. Se evalúan la tasa de conversión, el gasto de los usuarios que compran y la influencia de la fuente de tráfico y del tipo de usuario.
@@ -141,9 +151,159 @@ El notebook carga el archivo desde `/datasets/landing_experiment.csv`; si lo eje
 ```
 ├── Landing_Experiment.ipynb   # Análisis completo
 ├── landing_experiment.csv     # Datos del experimento
-└── README.md
+└── README.md                  # Bilingüe (ES/EN)
 ```
-# Contacto
 
-- LinkedIn: https://www.linkedin.com/in/emma-solorzano-hernandez-jauregui-200301345/
-- Perfil de Tableau Public: https://public.tableau.com/app/profile/emma.solorzano7415/vizzes
+[⬆️ Volver arriba](#top) · [🇬🇧 Read in English](#en)
+
+---
+
+<a id="en"></a>
+
+# A/B Experiment on a Landing Page
+
+Statistical analysis of an A/B experiment comparing two versions of a landing page (**A: control** and **B: variant**) to decide, based on data, which version should go into production. The analysis evaluates conversion rate, spend among buyers, and the influence of traffic source and user type.
+
+---
+
+## 1. Business problem and context
+
+The landing page is the entry point for users: its design affects how many visitors become customers and how much they spend. A redesigned landing page (version B) was created, and before replacing the current one (A), the team needs to know:
+
+- Does the new version convert more visitors into customers?
+- Do customers arriving through the new version spend more?
+- Does any traffic channel convert better than the others?
+- Does behavior differ between new and returning users?
+
+Making this decision without statistical validation could lead to rolling out a change that adds no value, or discarding one that does.
+
+## 2. Analysis objective
+
+Determine, using appropriate statistical tests, **which landing page version performs better**, and turn the results into marketing recommendations. Specifically:
+
+1. Explore and validate data quality.
+2. Compare **average spend** between A and B.
+3. Compare **conversion rate** between A and B.
+4. Assess the relationship between **traffic source** and conversion.
+5. Assess the relationship between **user type** and conversion.
+6. Visualize the results and communicate an executive insight.
+
+## 3. Dataset
+
+**File:** `landing_experiment.csv` · **40,000 users** · 9 columns · no missing values and no duplicate `user_id`.
+
+| Column | Description |
+|--------|-------------|
+| `user_id` | Unique user identifier |
+| `date` | Date the user was exposed to the page (January 1–28, 2026) |
+| `landing` | Version shown: A or B |
+| `region` | Geographic region (5 regions) |
+| `dispositivo` | Device: Mobile or Desktop |
+| `traffic_source` | Acquisition channel: Organic, Ads, Email, Referral |
+| `user_type` | New (`Nuevo`) or Returning (`Recurrente`) |
+| `converted` | 1 if the user converted, 0 otherwise |
+| `gasto` | Amount spent (0 if the user did not convert) |
+
+**Sample composition**
+- Balanced groups: **A = 19,982** users and **B = 20,018** users.
+- Traffic: Organic 45.0%, Ads 29.8%, Email 15.3%, Referral 9.9%.
+- User type: 65.1% new and 34.9% returning.
+- Device: 62.1% Mobile.
+- Overall conversion: 5,706 users (14.3%); average spend of ~$9.33 per user and ~$65 per converting user.
+
+## 4. Tools and technologies
+
+- **Python** (Jupyter Notebook)
+- **pandas** for data handling and validation
+- **scipy.stats**: `levene`, `ttest_ind` (Welch), `chi2_contingency`
+- **statsmodels**: `proportions_ztest`
+- **seaborn** and **matplotlib** for visualization
+
+## 5. Process
+
+1. **Loading and validation:** review of structure, missing values, and `user_id` uniqueness; conversion of `date` from `object` to `datetime`; verification of the time range and expected categories (A/B, regions, devices, channels, and user types).
+2. **Average spend (A vs. B):** compared spend among **users who converted** (2,512 in A and 3,194 in B). Since Levene's test showed unequal variances between groups, **Welch's t-test** (`equal_var=False`) was used.
+3. **Conversion rate (A vs. B):** **two-sample Z-test for proportions**.
+4. **Traffic source vs. conversion:** **chi-square test of independence** on the contingency table.
+5. **User type vs. conversion:** **chi-square test of independence**.
+6. **Visualization:** bar charts (converted vs. not converted) by traffic source and by user type.
+7. **Executive insight:** summary of findings and recommendations.
+
+Significance level for all tests: **α = 0.05**.
+
+## 6. Key findings
+
+### 🎯 Conversion: version B wins clearly
+
+| Version | Users | Converted | Conversion rate |
+|---------|------:|----------:|----------------:|
+| A (control) | 19,982 | 2,512 | **12.57%** |
+| B (variant) | 20,018 | 3,194 | **15.96%** |
+
+- Difference: **+3.39 percentage points**, a **~27% relative** improvement.
+- Z = −9.68, **p ≈ 3.8 × 10⁻²²** → statistically significant difference.
+
+### 💰 Spend: customers on B spend more
+
+- Levene: p ≈ 6.9 × 10⁻⁸ → variances differ, so Welch's t-test was used.
+- t = −9.48, **p ≈ 3.6 × 10⁻²¹** → average spend among converting users is **significantly higher in B** than in A.
+
+Overall, B not only converts more users but each customer also brings more value.
+
+### 🌐 Traffic source: significant relationship, small effect
+
+| Channel | Users | Converted | Conversion rate |
+|---------|------:|----------:|----------------:|
+| Email | 6,123 | 918 | **14.99%** |
+| Ads | 11,935 | 1,759 | 14.74% |
+| Referral | 3,955 | 549 | 13.88% |
+| Organic | 17,987 | 2,480 | 13.79% |
+
+- Chi-square = 8.66, df = 3, **p = 0.034** → there is a statistically significant association between channel and conversion.
+- Email and Ads convert best; Organic contributes the largest absolute number of conversions but with the lowest rate. The spread across channels is only ~1.2 percentage points.
+
+### 👤 User type: no difference
+
+| Type | Users | Converted | Conversion rate |
+|------|------:|----------:|----------------:|
+| New | 26,033 | 3,738 | 14.36% |
+| Returning | 13,967 | 1,968 | 14.09% |
+
+- Chi-square = 0.51, **p = 0.474** → no evidence that user type affects the likelihood of converting.
+
+## 7. Recommendations and business impact
+
+1. **Roll out version B as the main landing page.** It improves conversion by ~27% (relative) and increases spend per customer. Both effects are significant and point in the same direction, so the revenue impact is twofold: more buyers and higher value per purchase.
+2. **Prioritize Email and Ads for direct-conversion campaigns.** They have the highest conversion rates. Before reallocating budget, cross-check these results with cost per channel to confirm which one delivers the best return.
+3. **Treat Organic and Referral traffic differently.** They bring volume but convert less; consider testing informational content, email capture with an incentive, and nurturing flows to move them to Email later.
+4. **Do not tailor the landing strategy by user type.** New and returning users convert almost identically, so there is no evidence to justify separate experiences.
+5. **Monitor after launch.** Track conversion and spend per customer during the first weeks to confirm the effect holds outside the experiment.
+
+## 8. Limitations and caveats
+
+- **Spend was compared only among users who converted.** This measures value per customer, not revenue per visitor (which combines conversion and spend). Comparing revenue per exposed user, including zeros, would give a more direct view of total economic impact.
+- **The spend effect is not quantified.** The notebook reports significance but not group means or a confidence interval, so it is not possible to estimate how much more B customers spend.
+- **Small effect for traffic source.** The significance (p = 0.034) is moderate and channel differences are ~1 percentage point; treat them as a trend rather than a strong difference.
+- **Landing × segment interaction was not tested.** The claim that both user types benefited equally from version B is not backed by a test: `user_type` was only compared against conversion overall. The same applies to channel, region, and device.
+- **Randomization was not checked across covariates.** The A/B split is balanced in volume, but it was not verified that region, device, channel, and user type are similarly distributed between A and B.
+- **Experiment duration.** The test ran for 28 days; a possible novelty effect and weekly seasonality were not assessed.
+- **No cost data.** Conclusions about channel "profitability" require spend information that this dataset does not include.
+
+## 9. How to reproduce
+
+```bash
+pip install pandas scipy statsmodels seaborn matplotlib jupyter
+jupyter notebook Landing_Experiment.ipynb
+```
+
+The notebook loads the data from `/datasets/landing_experiment.csv`; if you run it locally, update the path to wherever you saved the CSV.
+
+## 10. Project structure
+
+```
+├── Landing_Experiment.ipynb        # Full analysis
+├── landing_experiment.csv          # Experiment data
+└── README.md                  # Bilingual (ES/EN)
+```
+
+[⬆️ Back to top](#top) · [🇪🇸 Leer en español](#es)
