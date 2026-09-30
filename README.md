@@ -143,3 +143,7 @@ El notebook carga el archivo desde `/datasets/landing_experiment.csv`; si lo eje
 ├── landing_experiment.csv     # Datos del experimento
 └── README.md
 ```
+# Contacto
+
+- LinkedIn: https://www.linkedin.com/in/emma-solorzano-hernandez-jauregui-200301345/
+- Perfil de Tableau Public: https://public.tableau.com/app/profile/emma.solorzano7415/vizzes
