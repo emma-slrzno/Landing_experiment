@@ -153,6 +153,10 @@ El notebook carga el archivo desde `/datasets/landing_experiment.csv`; si lo eje
 ├── landing_experiment.csv     # Datos del experimento
 └── README.md                  # Bilingüe (ES/EN)
 ```
+# Contacto
+
+•⁠  ⁠LinkedIn: https://www.linkedin.com/in/emma-solorzano-hernandez-jauregui-200301345/
+•⁠  ⁠Perfil de Tableau Public: https://public.tableau.com/app/profile/emma.solorzano7415/vizzes
 
 [⬆️ Volver arriba](#top) · [🇬🇧 Read in English](#en)
 
@@ -305,5 +309,9 @@ The notebook loads the data from `/datasets/landing_experiment.csv`; if you run 
 ├── landing_experiment.csv          # Experiment data
 └── README.md                  # Bilingual (ES/EN)
 ```
+# Contact
+
+•⁠  ⁠LinkedIn: https://www.linkedin.com/in/emma-solorzano-hernandez-jauregui-200301345/
+•⁠  ⁠Tableau Public profile: https://public.tableau.com/app/profile/emma.solorzano7415/vizzes
 
 [⬆️ Back to top](#top) · [🇪🇸 Leer en español](#es)
